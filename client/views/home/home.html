@@ -1,0 +1,68 @@
+<template name="home">
+
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {{#each builds}}
+      {{> build }}
+    {{/each}}
+  </div>
+</template>
+
+
+<template name="build">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{matchId}}" aria-expanded="false" aria-controls="collapse{{matchId}}">
+          <span style="font-size:20pt; float:left">#{{rank}}</span>
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/champion/{{championImgName championId}}" title="{{championId}}"/>
+          
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/1052.png" />
+          
+          <span style="font-size:20pt; float:right">{{kills}} / 1 / 19</span>
+          
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{matchId}}" class="collapse " role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+
+        <div class="row text-center">
+          <div style="margin: 0 auto;width: 75%;">
+            <h3>Runes</h3>
+              {{#each runes}}
+              <div class="col-md-2" >
+                <div><img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/rune/{{runeImgName runeId}}" title="{{runeTitle runeId}}"/></div>
+                <div><h4>{{rank}}X</h4></div>
+                <div><h5>{{runeName runeId}}</h5></div>
+                <div><h6>{{runeDesc runeId}}</h6></div>
+                
+              </div>
+              {{/each}}
+          </div>
+        </div>
+        
+        <div class="row text-center">
+          <h3>Masteries</h3>
+          <iframe src="http://leaguecraft.com/masteries/iframe/?points={{masteryCode masteries}}" width="770" height="525" style="overflow: hidden;"></iframe>
+        </div>
+        
+
+        <div class="row text-center">
+          <h3>Item Purchases</h3>
+          {{#each purchases}}
+            <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/{{itemId}}.png" title="{{itemTitle itemId}}"/>
+          {{/each}}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </template>
