@@ -1,12 +1,15 @@
 Template.home.helpers({
   builds: function(){
     
-    return Collections.Builds.find({},{sort:[["kills","desc"]]}).map(function(build, index) {
+    return Collections.Builds.find({},{sort:[["stats.kills","desc"]]}).map(function(build, index) {
                                                                           build.rank = index + 1;
                                                                           return build;
                                                                         });
   }
 });
+
+
+
 
 
 Template.build.helpers({
@@ -23,6 +26,11 @@ Template.build.helpers({
       }
       return returnCodes.join("");
   },
+  spellImgName: function(spellId){
+    
+    return Collections.SummonersArray[spellId].image.full;
+    
+  }, 
   runeImgName: function(runeId){
     
     return Collections.RuneArray[runeId].image.full;
@@ -47,8 +55,33 @@ Template.build.helpers({
     
     return Collections.ItemArray[itemId].name + "\n\n" + Collections.ItemArray[itemId].plaintext;
     
+  },
+  itemTooltipName: function(itemId){
+    if(Collections.ItemArray[itemId] !=undefined)
+      return Collections.ItemArray[itemId].name.replace(/\s+/g, '-').toLowerCase();;
+    return null;
+  },
+  spells: function(){
+    
+    var spells = Collections.ChampionsArray[this.championId].spells.slice(0);
+    spells[0].Q = "Q";
+    spells[1].Q = "W";
+    spells[2].Q = "E";
+    spells[3].Q = "R";
+    for (var i = 0; i < spells.length; i++) {
+      spells[i].showSkillSlots = [];
+      for(var j=0; j<this.skillSlots.length; j++){
+        console.dir(this.skillSlots[j].itemId);
+        spells[i].showSkillSlots[j] = {};
+        spells[i].showSkillSlots[j].show = (this.skillSlots[j].itemId == (i+1));
+        spells[i].showSkillSlots[j].number = j+1;
+      }
+    }
+    
+    return spells;
   }
-  
-  
-  
 });
+
+Template.home.rendered = function(){
+  LoLTip.add();
+}
