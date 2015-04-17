@@ -7,6 +7,6 @@ Built On
 * LoL Tooltip Library
 * Meteor
 * MongoDB
-* LeagueJS
+* Modified LeagueJS [https://github.com/jessejin/LeagueJS]
 
 Demo Site: [http://jessejin.cloudapp.net/]
