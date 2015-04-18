@@ -8,13 +8,12 @@ Template.home.helpers({
   }
 });
 
-
-
-
-
 Template.build.helpers({
   championImgName: function(championId){
     return Collections.ChampionsArray[championId].image.full;
+  }, 
+  championName: function(championId){
+    return Collections.ChampionsArray[championId].name.replace(/\W/g, '').toLocaleLowerCase();
   }, 
   masteryCode: function(masteries){
       
@@ -64,14 +63,15 @@ Template.build.helpers({
   spells: function(){
     
     var spells = Collections.ChampionsArray[this.championId].spells.slice(0);
+    
     spells[0].Q = "Q";
     spells[1].Q = "W";
     spells[2].Q = "E";
     spells[3].Q = "R";
     for (var i = 0; i < spells.length; i++) {
+      spells[i].championId = this.championId;
       spells[i].showSkillSlots = [];
       for(var j=0; j<this.skillSlots.length; j++){
-        console.dir(this.skillSlots[j].itemId);
         spells[i].showSkillSlots[j] = {};
         spells[i].showSkillSlots[j].show = (this.skillSlots[j].itemId == (i+1));
         spells[i].showSkillSlots[j].number = j+1;
@@ -83,5 +83,7 @@ Template.build.helpers({
 });
 
 Template.home.rendered = function(){
-  LoLTip.add();
+
+  setTimeout(function(){ LoLTip.add(); }, 6000);
+  
 }

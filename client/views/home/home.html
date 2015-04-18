@@ -19,6 +19,7 @@
           <span style="font-size:20pt; float:left">#{{rank}}&nbsp;</span>
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/champion/{{championImgName championId}}" title="{{championId}}"/>
           &nbsp;&nbsp;
+
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/{{stats.item0}}.png" />
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/{{stats.item1}}.png" />
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/{{stats.item2}}.png" />
@@ -31,6 +32,7 @@
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/spell/{{spellImgName spell1Id}}" />
           <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/spell/{{spellImgName spell2Id}}" />
 
+          
           <span style="font-size:20pt; float:right">{{stats.kills}} / {{stats.deaths}} / {{stats.assists}}</span>
           
         </a>
@@ -65,7 +67,9 @@
             <h3 class="text-center">Skills Order</h3>
   
             {{#each spells}}
-                <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/spell/{{image.full}}" />
+                <a href="http://lolbuilder.net/{{championName championId}}/{{Q}}">
+                  <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/spell/{{image.full}}" />
+                </a>
                     <span style="font-size:20pt;font-family:monospace;">&nbsp;{{Q}}&nbsp;</span>
 
                 
@@ -85,10 +89,10 @@
           </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row text-center" id="purchases{{matchId}}">
           <h3>Item Purchases Order</h3>
           {{#each purchases}}
-          <a href="http://lolbuilder.net/item/{{itemTooltipName itemId}}">
+          <a href="http://lolbuilder.net/item/{{itemId}}">
             <img src="http://ddragon.leagueoflegends.com/cdn/5.6.2/img/item/{{itemId}}.png"/>
             </a>
           {{/each}}
